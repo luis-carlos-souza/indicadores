@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Suporte Sondagens - Indicadores</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">	
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/bootswatch/3.1.1/slate/bootstrap.min.css" rel="stylesheet">
+        <link href="assets/css/main.css" rel="stylesheet">
+        <link href="assets/vendor/notify/notify.css" rel="stylesheet">
+        <!--[if lt IE 9]>
+          <script src="assets/vendor/html5shiv.js"></script>
+          <script src="assets/vendor/respond.min.js"></script>
+        <![endif]-->	
+    </head>
+    <body>	
+        <? include 'menu.html';?>
+        <div class="pad-10 container">
+
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">USUÁRIOS</h3>
+                </div>
+                <div class="pad-10">
+                    <form class="form pad-top-bot-10" role="form" method="POST" action="{baseuri}/">
+                        <div class="pull-right">
+                            <a href="{baseuri}/usuario/novo/" class="btn btn-primary btn-sm tip" title="incluir novo cadastro">
+                                <i class="glyphicon glyphicon-plus"></i>
+                                Cadastrar Novo
+                            </a>                            
+                        </div>
+                    </form>
+
+                    <div class="table-responsive">
+                        <table class="table table-striped mar-top-50 table-responsive">
+                            <thead>
+                                <tr>
+                                    <th width="40px">ID</th>
+                                    <th>Nome</th>
+                                    <th>Login</th>
+                                    <th>E-mail</th>
+                                    <th width="80px"><i class="glyphicon glyphicon-cog"></i> Ação</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!--{loop:rs}-->
+                                <!--{<tr>}-->
+                                <!--{<td>rs.id</td>}-->
+                                <!--{<td>rs.tx_nome</td>}-->
+                                <!--{<td>rs.login</td>}-->
+                                <!--{<td>rs.tx_email</td>}-->
+                                <!--{<td>}-->
+                            <!--{<a class="btn btn-primary btn-sm tip" id="rs.id" 
+                               href="{baseuri}/usuario/editar/rs.id/" title="editar cadastro">
+                                <i class="glyphicon glyphicon-edit"></i>
+                            </a>}-->                                                            
+                            <!--{<button class="btn btn-danger btn-sm tip remove" id="rs.id"  title="remover cadastro"><i class="glyphicon glyphicon-trash"></i></button>}-->
+                            <!--{</td>}-->
+                            <!--{</tr>}-->
+                            <!--{end:rs}-->
+                            </tbody>
+                        </table>
+                        <div class="pagination"><!--{pages}--></div>		
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Remover Registro</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Você está prestes a remover um registro. Este processo não poderá ser desfeito!<br> Deseja realmente prosseguir?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button  class="btn btn-primary" data-dismiss="modal">Cancelar</button>
+                        <a href="{baseuri}/usuario/remove/" id="url-user-remove" class="btn btn-danger">Prosseguir</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="assets/vendor/jquery-1.8.3.min.js"></script>
+        <script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>		
+        <script src="assets/vendor/bootstrap/js/bootstrap-hover.js"></script>		
+        <script src="assets/vendor/bootstrap/js/bootstrap-typeahead.js"></script>		
+        <script src="assets/vendor/notify/notify.js"></script>		
+        <script src="assets/js/main.js"></script>	
+        <script src="assets/js/user.js"></script>	
+        <script>
+            {onMsg}
+        </script>        
+    </body>	
+</html>

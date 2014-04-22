@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Suporte Sondagens - Indicadores</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">	
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/bootswatch/3.1.1/slate/bootstrap.min.css" rel="stylesheet">
+        <link href="assets/css/main.css" rel="stylesheet">
+        <!--[if lt IE 9]>
+          <script src="assets/vendor/html5shiv.js"></script>
+          <script src="assets/vendor/respond.min.js"></script>
+        <![endif]-->	
+    </head>
+    <body>	
+        <div class="container">
+            <div  style="width: 450px; margin: 0 auto;">     
+                <p class="text-center"><img src="assets/img/layout/logo.jpg" class="text-center" /></p>
+                <div class="panel panel-primary">
+                     <div class="panel-heading">
+                         <i class="glyphicon glyphicon-lock"></i> 
+                         <span style="font-size: 16px">
+                             Panel de Controle - Acesso Restrito
+                         </span>
+                     </div>
+                    <div class="panel-body">
+                        <form role="form" method="POST" action="{baseuri}/login/" autocomplete="off">
+                            <div class="form-group">
+                                <label>Login:</label>
+                                <input type="text" class="form-control" name="user_login"  required autocomplete="off"
+                                       id="user_login" placeholder="informe seu login" value=""/>
+                            </div>
+                            <div class="form-group">
+                                <label>Senha:</label>                            
+                                <input type="password" class="form-control" name="user_password" required autocomplete="off"
+                                       id="user_password" placeholder="informe sua senha" value=""/>
+                            </div>
+                            <button class="btn btn-primary"><i class="glyphicon glyphicon-transfer"></i> Entrar</button>
+                            
+                            <p class="alert alert-danger mar-top-20 hider no-pad pad-6" id="msg">
+                                {message_login}
+                                <a class="close" data-dismiss="alert" href="#" aria-hidden="true">&times;</a>
+                            </p>
+                        </form>
+                    </div>                
+                </div>                          
+            </div>
+        </div>
+        
+        <script src="assets/vendor/jquery-1.8.3.min.js"></script>
+        <script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>		
+        <script>{onMsg}</script>        
+    </body>	
+</html>

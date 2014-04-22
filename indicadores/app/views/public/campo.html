@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Suporte Sondagens - Indicadores</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">	
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/bootswatch/3.1.1/slate/bootstrap.min.css" rel="stylesheet">
+        <link href="assets/css/main.css" rel="stylesheet">
+        <!--[if lt IE 9]>
+          <script src="assets/vendor/html5shiv.js"></script>
+          <script src="assets/vendor/respond.min.js"></script>
+        <![endif]-->	
+    </head>
+    <body>	
+        <? include 'menu.html';?>
+        <div class="pad-10 container">
+
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Sondagens e Ensaios de Campo</h3>
+                </div>
+
+                <div class="pad-10">
+                    <form class="form" id="form-filter" action="" method="post">
+                        <div class='row'>
+                            <div class='col-xs-2 form-group'>
+                                <label class='control-label'>Data Inicial</label>
+                                <input type="text" class="form-control date" name="data_s" placeholder="Data Inicial" value="[data_s]" />
+                            </div>
+
+                            <div class='col-xs-2 form-group'>
+                                <label class='control-label'>Data Final</label>
+                                <input type="text" class="form-control date" name="data_e"  placeholder="Data Final" value="[data_e]" />
+                            </div>
+                            <div class='col-xs-8 form-group'>
+
+                                <label class='control-label'>Perfil</label> <br />
+
+                                <span class="button-checkbox">
+                                    <button type="button" class="btn tip btn-pf" value="PI" 
+                                            data-color="primary" title="Poço de Inspeção" >PI</button>
+                                    <input type="checkbox" class="hidden" checked />
+                                </span>
+
+                                <span class="button-checkbox">
+                                    <button type="button" class="btn btn-pf tip" value="SP"
+                                            data-color="primary" title="Sondagem a Percussão">SP</button>
+                                    <input type="checkbox" class="hidden" checked />
+                                </span>
+
+                                <span class="button-checkbox">
+                                    <button type="button" class="btn btn-pf tip" value="ST"
+                                            data-color="primary" title="Sondagem a Trado">ST</button>
+                                    <input type="checkbox" class="hidden" checked />
+                                </span>
+
+                                <span class="button-checkbox">
+                                    <button type="button" class="btn btn-pf tip" value="SM"
+                                            data-color="primary" title="Sondagem Mista">SM</button>
+                                    <input type="checkbox" class="hidden" checked />
+                                </span>
+
+                                <span class="button-checkbox">
+                                    <button type="button" class="btn  btn-pf tip" value="SR"
+                                            data-color="primary" title="Sondagem Rotativa">SR</button>
+                                    <input type="checkbox" class="hidden" checked />
+                                </span>
+                                <button class="btn btn-black go-to-perfil "><i class="glyphicon glyphicon-filter"></i> Filtrar</button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div id="chart_div" style="min-height: 350px;"></div>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+        <script type="text/javascript">
+            google.load("visualization", "1", {packages:["corechart"]});
+            google.setOnLoadCallback(drawChart);
+            function drawChart() {
+                var data = google.visualization.arrayToDataTable([
+                    [strJson]
+                ]);
+                var options = {
+                    title: '[titulo]'
+                };
+                var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+                chart.draw(data, options);
+            }
+        </script>
+
+        <script src="assets/vendor/jquery-1.8.3.min.js"></script>
+        <script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>		
+        <script src="assets/vendor/bootstrap/js/bootstrap-hover.js"></script>		
+        <script src="assets/vendor/datepicker/js/bootstrap-datepicker.js"></script>		
+        <link href="assets/vendor/datepicker/css/datepicker.css" rel="stylesheet">  
+        <script src="assets/js/main.js"></script>	
+        <script>
+            $('.date').datepicker({autoclose:true,format:'dd/mm/yyyy'});
+            var url_perfil = $('base').attr('href').replace('/app/','');
+            var perfil = [ [check_load] ];
+            $(function () {
+                $('.button-checkbox').each(function () {
+                    var $widget = $(this),
+                    $button = $widget.find('button'),
+                    $checkbox = $widget.find('input:checkbox'),
+                    color = $button.data('color'),
+                    settings = {
+                        on: {
+                            icon: 'glyphicon glyphicon-check'
+                        },
+                        off: {
+                            icon: 'glyphicon glyphicon-unchecked'
+                        }
+                    };
+                    $button.on('click', function () {
+                        $checkbox.prop('checked', !$checkbox.is(':checked'));
+                        $checkbox.triggerHandler('change');
+                        updateDisplay();
+                    });
+                    $checkbox.on('change', function () {
+                        if($checkbox.is(':checked') ){  
+                            var removeItem = $button.val();
+                            var found = $.inArray(removeItem, perfil) > -1;
+                            if(!found){                            
+                                perfil.push(removeItem);
+                            }
+                        }else{
+                            var removeItem = $button.val();
+                            $checkbox.removeAttr('checked');
+                            perfil = jQuery.grep(perfil, function(value) {
+                                return value != removeItem;
+                            });   
+                        }
+                        var baseuri = $('base').attr('href').replace('/app/',''); 
+                        url_perfil = baseuri + '/index/campo/' + perfil.join("-") + '/';
+                        if(perfil.join("-").length <= 0){
+                            url_perfil = baseuri + '/index/campo/';
+                        }
+                        updateDisplay();
+                    });
+                    function updateDisplay() {      
+                        var found = $.inArray($button.val(), perfil) > -1;
+                        if(!found){
+                            $checkbox.removeAttr('checked');
+                            console.log( $button.val()+ ' Unchecked ' )
+                        }                                                                    
+                        var isChecked = $checkbox.is(':checked');
+                        $button.data('state', (isChecked) ? "on" : "off");
+                        $button.find('.state-icon')
+                        .removeClass()
+                        .addClass('state-icon ' + settings[$button.data('state')].icon);
+                        if (isChecked) {
+                            console.log( $button.val()+ ' checked ' )
+                            
+                            $button
+                            .removeClass('btn-default')
+                            .addClass('btn-' + color + ' active');
+                        }
+                        else {
+                            $button
+                            .removeClass('btn-' + color + ' active')
+                            .addClass('btn-default');
+                        }
+                    }
+
+                    function init() {
+                        updateDisplay();
+                        if ($button.find('.state-icon').length == 0) {
+                            $button.prepend('<i class="state-icon ' + settings[$button.data('state')].icon + '"></i> ');
+                        }
+                    }
+                    init();
+                });
+                
+                url_perfil = baseuri + '/index/campo/' + perfil.join("-") + '/';
+                $('#form-filter').attr('action',url_perfil)
+                $('.go-to-perfil').on('click',function(){
+                    $('#form-filter').attr('action',url_perfil)
+                    ///window.location.href =  url_perfil;
+                })
+            });
+
+        </script>
+    </body>	
+</html>

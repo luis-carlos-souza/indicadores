@@ -1,0 +1,11 @@
+RewriteEngine On
+
+# Diretorios extras
+RewriteRule ^teste - [L,NC]
+
+#Diretorios da base
+RewriteRule ^([a-zA-Z0-9-_/]+)/?$ ./index.php?route=$1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9-_/]+)?$ ./index.php?route=index [L,QSA]
+
+#Pagina 404
+ErrorDocument 404 404.php

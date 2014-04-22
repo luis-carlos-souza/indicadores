@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Suporte Sondagens - Indicadores</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">	
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/bootswatch/3.1.1/slate/bootstrap.min.css" rel="stylesheet">
+        <link href="assets/css/main.css" rel="stylesheet">
+        <link href="assets/vendor/notify/notify.css" rel="stylesheet">
+        <!--[if lt IE 9]>
+          <script src="assets/vendor/html5shiv.js"></script>
+          <script src="assets/vendor/respond.min.js"></script>
+        <![endif]-->	
+    </head>
+    <body>	
+        <? include 'menu.html';?>
+        <div class="pad-10 container">
+
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">USUÁRIOS - EDITAR CADASTRO {user_name}</h3>
+                </div>
+                <div class="pad-10">
+                    <div class="mar-top-20 pull-right btn-prevent">
+                        <button class="btn btn-success user-save tip" type="button" title="gravar alteração">
+                            <i class="glyphicon glyphicon-ok"></i>
+                            Cadastrar
+                        </button>
+                        <button class="btn btn-danger user-cancel tip" type="button" title="cancelar cadastro">
+                            <i class="glyphicon glyphicon-remove-circle"></i>
+                            Cancelar
+                        </button>
+                    </div>
+                    <span class="separator-line">Dados do Usuário</span>
+                    <form class="validate" id="f-user" action="{baseuri}/usuario/incluir/" method="post" autocomplete="off"> 
+                        <table class="table table-striped mar-top-20 td-first-right" id="tbl_cod_add">
+                            <tr>
+                                <td width="150">Nome Completo</td>
+                                <td>
+                                    <span class="col-lg-6">
+                                        <input type="text" class="form-control required" id="tx_nome" name="tx_nome" value="{tx_nome}"
+                                               placeholder="Informe o nome completo">
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Login</td>
+                                <td>
+                                    <span class="col-lg-6">
+                                        <input type="text" class="form-control required" name="login" id="login" 
+                                               placeholder="nome de usuário / login" value="{login}">
+                                    </span>                          
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Senha</td>
+                                <td>
+                                    <span class="col-lg-6">
+                                        <input type="password" class="form-control" name="senha" id="senha" placeholder="digite somente se desejar alterar a senha">
+                                    </span>                                                                  
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>E-mail</td>
+                                <td>
+                                    <span class="col-lg-6">
+                                        <input type="text" class="form-control email" name="tx_email" id="tx_email" placeholder="informe o e-mail do usuário"
+                                               value="{tx_email}">
+                                    </span>                                
+                                </td>
+                            </tr>
+                            <!--
+                            <tr>
+                                <td>Status</td>
+                                <td>
+                                    <span class="col-lg-6">
+                                        <select name="user_level" id="user_level" class="form-control required">
+                                            <option value="">Selecione um nível...</option>
+                                            <option value="1">Administrador</option>
+                                            <option value="2">Usuário</option>
+                                        </select>
+                                    </span>                                  
+                                </td>
+                            </tr>	
+                            -->
+                        </table>
+                        <!--
+                        <span class="separator-line">Permissões do Usuário</span>
+                        <table class="table table-striped mar-top-20 td-first-right">
+                            <tr>
+                                <td width="150">Nível de Acesso</td>
+                                <td>
+                                    <span class="col-lg-6">
+                                        <select name="nivel" id="nivel" class="form-control">
+                                            <option value="1">Nível 1</option>
+                                            <option value="2">Nível 2</option>
+                                            <option value="3">Nível 3</option>
+                                        </select>
+                                    </span>
+                                </td>
+                            </tr>                        
+                        </table>
+                        -->
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+        <script src="assets/vendor/jquery-1.8.3.min.js"></script>
+        <script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>		
+        <script src="assets/vendor/bootstrap/js/bootstrap-hover.js"></script>		
+        <script src="assets/vendor/bootstrap/js/bootstrap-typeahead.js"></script>		
+        <script src="assets/vendor/notify/notify.js"></script>		
+        <script src="assets/vendor/jquery.mask.js"></script>		
+        <script src="assets/vendor/validate/js/jquery.validate.v2.js"></script>	        
+        <script src="assets/js/main.js"></script>	
+        <script src="assets/js/user.js"></script>	
+        <script>{onMsg}</script>        
+    </body>	
+</html>
